@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:legend_design_core/legend_design_app.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'styles/appConfig.dart';
 import 'styles/layoutConfig.dart';
@@ -22,9 +23,10 @@ void main() {
       menuOptions: AppConfig.menuOptions,
       routes: AppConfig.routes,
       logo: Container(
-        width: 54,
-        height: 54,
-      ),
+          // width: 54,
+          // height: 54,
+          ),
+      title: "Ad Left",
       theme: ThemeProvider(
         darkTheme: AppConfig.darkColorTheme,
         lightTheme: AppConfig.lightColorTheme,

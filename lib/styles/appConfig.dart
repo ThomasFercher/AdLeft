@@ -250,11 +250,11 @@ class AppConfig {
   );
 
   static List<MenuOption> menuOptions = [
-    MenuOption(
+    /* MenuOption(
       title: "Home",
       page: "/",
       icon: Icons.home,
-    ),
+    ),*/
   ];
 
   static List<LegendDrawerRoute> drawerRoutes = [
