@@ -1,3 +1,6 @@
+import 'package:adleft/pages/home.dart';
+import 'package:adleft/pages/modals/settings.dart';
+import 'package:adleft/pages/productPage.dart';
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/drawers/legend_drawer_info.dart';
 import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar.dart';
@@ -11,8 +14,6 @@ import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
 import 'package:legend_design_core/styles/theming/sizing/legend_sizing_theme.dart';
 import 'package:legend_design_core/typography/typography.dart';
-import 'package:legend_design_template/pages/home.dart';
-import 'package:legend_design_template/pages/modals/settings.dart';
 
 class AppConfig {
   static BottomBarSizing bottomBarSizing = BottomBarSizing(
@@ -274,6 +275,11 @@ class AppConfig {
     RouteInfo(
       name: "/",
       page: Home(),
+    ),
+    RouteInfo(
+      name: "/products",
+      page: ProductsPage(),
+      isUnderyling: true,
     ),
   ];
 }

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(legend_design_template LANGUAGES CXX)
+project(ad_left LANGUAGES CXX)
 
-set(BINARY_NAME "legend_design_template")
+set(BINARY_NAME "ad_left")
 
 cmake_policy(SET CMP0063 NEW)
 

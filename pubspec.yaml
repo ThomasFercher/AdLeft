@@ -1,4 +1,4 @@
-name: legend_design_template
+name: adleft
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -31,11 +31,12 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   legend_design_widgets:
-    git: https://github.com/ThomasFercher/Legend-Design-Widgets
+    path: ../Legend-Design-Widgets
   legend_design_core:
-    git: https://github.com/ThomasFercher/Legend-Design-Core
+    path: ../Legend-Design-Core
   legend_design_platform:
-    git: https://github.com/ThomasFercher/Legend-Design-Cross
+    git:
+      url: https://github.com/ThomasFercher/Legend-Design-Cross.git
 
 dev_dependencies:
   flutter_test:

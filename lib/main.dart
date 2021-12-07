@@ -22,11 +22,8 @@ void main() {
       drawerRoutes: AppConfig.drawerRoutes,
       menuOptions: AppConfig.menuOptions,
       routes: AppConfig.routes,
-      logo: Container(
-          // width: 54,
-          // height: 54,
-          ),
       title: "Ad Left",
+      logo: null,
       theme: ThemeProvider(
         darkTheme: AppConfig.darkColorTheme,
         lightTheme: AppConfig.lightColorTheme,
