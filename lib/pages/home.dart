@@ -1,3 +1,5 @@
+import 'package:adleft/logic/product.dart';
+import 'package:adleft/logic/providers/productProvider.dart';
 import 'package:adleft/overrides/productCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -17,9 +19,15 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     ThemeProvider theme = context.watch<ThemeProvider>();
+    List<Product> products = context.watch<ProductProvider>().products;
+    List<Widget> children;
+
+    children = products.map((p) => ProductCard(product: p)).toList();
+
     return LegendScaffold(
       singlePage: true,
       verticalChildrenSpacing: 12,
+      showAppBarMenu: false,
       children: [
         LegendCarousel(
           height: 300,
@@ -54,24 +62,7 @@ class Home extends StatelessWidget {
                               crossAxisCount: 4,
                               crossAxisSpacing: 4,
                               mainAxisSpacing: 4,
-                              children: [
-                                ProductCard(
-                                  uuid: "Number1",
-                                ),
-                                ProductCard(
-                                  uuid: "Number2",
-                                ),
-                                ProductCard(
-                                  uuid: "Number3",
-                                ),
-                                ProductCard(
-                                  uuid: "Number4",
-                                ),
-                                LegendCard(),
-                                LegendCard(),
-                                LegendCard(),
-                                LegendCard(),
-                              ],
+                              children: children,
                             ),
                           ),
                         ],

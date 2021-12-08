@@ -1,3 +1,4 @@
+import 'package:adleft/logic/product.dart';
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/router/router_provider.dart';
@@ -7,11 +8,11 @@ import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
 import 'package:provider/src/provider.dart';
 
 class ProductCard extends StatelessWidget {
-  final String uuid;
+  final Product product;
 
   ProductCard({
     Key? key,
-    required this.uuid,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -20,13 +21,29 @@ class ProductCard extends StatelessWidget {
 
     return LegendCard(
       children: [
+        ClipRRect(
+          borderRadius: theme.sizing.borderRadius[1].copyWith(
+            bottomLeft: Radius.zero,
+            bottomRight: Radius.zero,
+          ),
+          child: Hero(
+            tag: product.uid,
+            child: Image.asset(
+              product.imagePath,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
         Align(
           alignment: Alignment.bottomRight,
           child: LegendAnimatedIcon(
             icon: Icons.thumb_up_alt,
             onPressed: () {
               RouterProvider.of(context).pushPage(
-                settings: RouteSettings(name: "/products", arguments: uuid),
+                settings: RouteSettings(
+                  name: "/products",
+                  arguments: product.uid,
+                ),
               );
             },
             theme: LegendAnimtedIconTheme(

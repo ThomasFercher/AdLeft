@@ -1,3 +1,6 @@
+import 'package:adleft/logic/product.dart';
+import 'package:adleft/logic/providers/productProvider.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/legend_scaffold.dart';
 import 'package:legend_design_core/router/routeInfoProvider.dart';
@@ -13,15 +16,28 @@ class ProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     RouteSettings? route = RouteInfoProvider.of(context)?.route;
     ThemeProvider theme = context.watch<ThemeProvider>();
+    String? uid = route?.arguments.toString();
+    Product? p = context.watch<ProductProvider>().getFromUid(uid!);
+
     return LegendScaffold(
       pageName: "Product",
       layoutType: LayoutType.FixedHeader,
-      children: [
-        LegendText(
-          text: "${route?.arguments}",
-          textStyle: theme.typography.h0,
-        ),
-      ],
+      showAppBarMenu: false,
+      singleScreen: true,
+      contentBuilder: (context) {
+        return Column(
+          children: [
+            if (p?.imagePath != null)
+              Hero(
+                tag: p!.uid,
+                child: Image.asset(
+                  p.imagePath,
+                  height: 600,
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }
