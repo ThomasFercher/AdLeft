@@ -1,4 +1,4 @@
-import 'package:adleft/logic/product.dart';
+import 'package:adleft/logic/objects/product.dart';
 import 'package:adleft/logic/providers/productProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -22,34 +22,42 @@ void main() {
 */
   List<Product> products = [
     Product(
-      name: "Produkt1",
-      description: "Test",
-      price: 12,
-      link: "yee",
+      name: "Produkt 2",
+      description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      price: 4.99,
+      link:
+          "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
       uid: "1",
       imagePath: "./assets/images/product.png",
     ),
     Product(
-      name: "Produkt1",
-      description: "Test",
-      price: 12,
-      link: "yee",
+      name: "Produkt 2",
+      description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      price: 12.99,
+      link:
+          "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
       uid: "2",
       imagePath: "./assets/images/product.png",
     ),
     Product(
-      name: "Produkt1",
-      description: "Test",
-      price: 12,
-      link: "yee",
+      name: "Produkt 3",
+      description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      price: 69,
+      link:
+          "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
       uid: "3",
       imagePath: "./assets/images/product.png",
     ),
     Product(
-      name: "Produkt1",
-      description: "Test",
-      price: 12,
-      link: "yee",
+      name: "Produkt 4",
+      description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      price: 120,
+      link:
+          "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
       uid: "4",
       imagePath: "./assets/images/product.png",
     ),
@@ -74,7 +82,10 @@ void main() {
       ),
       providers: [
         ChangeNotifierProvider<ProductProvider>(
-          create: (_) => ProductProvider(products: products),
+          create: (_) => ProductProvider(
+            products: products,
+            wishlist: [],
+          ),
         ),
       ],
       globalFooter: LayoutInfo.footer,

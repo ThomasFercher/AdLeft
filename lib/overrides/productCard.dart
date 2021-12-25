@@ -1,9 +1,11 @@
-import 'package:adleft/logic/product.dart';
+import 'package:adleft/logic/objects/product.dart';
+import 'package:adleft/logic/providers/productProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
+import 'package:legend_design_widgets/datadisplay/card/imageCard.dart';
 import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
 import 'package:provider/src/provider.dart';
 
@@ -18,48 +20,54 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeProvider theme = context.watch<ThemeProvider>();
+    ProductProvider productProvider = context.watch<ProductProvider>();
 
-    return LegendCard(
-      children: [
-        ClipRRect(
-          borderRadius: theme.sizing.borderRadius[1].copyWith(
-            bottomLeft: Radius.zero,
-            bottomRight: Radius.zero,
+    return ImageCard(
+      title: product.name,
+      imagePath: product.imagePath,
+      description: product.description,
+      heroKey: product.uid,
+      onClick: () {
+        RouterProvider.of(context).pushPage(
+          settings: RouteSettings(
+            name: "/products",
+            arguments: product.uid,
           ),
-          child: Hero(
-            tag: product.uid,
-            child: Image.asset(
-              product.imagePath,
-              fit: BoxFit.cover,
+        );
+      },
+      builder: (context) {
+        return Align(
+          alignment: Alignment.topRight,
+          child: Padding(
+            padding: EdgeInsets.only(
+              right: theme.sizing.borderInset[0],
+              top: theme.sizing.borderInset[0],
             ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: LegendAnimatedIcon(
-            icon: Icons.thumb_up_alt,
-            onPressed: () {
-              RouterProvider.of(context).pushPage(
-                settings: RouteSettings(
-                  name: "/products",
-                  arguments: product.uid,
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.colors.cardBackgroundColor,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(21),
                 ),
-              );
-            },
-            theme: LegendAnimtedIconTheme(
-              enabled: theme.colors.selectionColor,
-              disabled: theme.colors.primaryColor,
+              ),
+              width: 42,
+              height: 42,
+              alignment: Alignment.center,
+              child: LegendAnimatedIcon(
+                icon: Icons.thumb_up_alt,
+                theme: LegendAnimtedIconTheme(
+                  disabled: theme.colors.foreground[0],
+                  enabled: theme.colors.selectionColor,
+                ),
+                isSelected: productProvider.isOnWishlist(product),
+                onPressed: () {
+                  productProvider.addToWishlist(product);
+                },
+              ),
             ),
           ),
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: LegendText(
-            text: "Product",
-            textStyle: theme.typography.h4,
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

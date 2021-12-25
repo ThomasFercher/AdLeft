@@ -1,6 +1,10 @@
 import 'package:adleft/pages/home.dart';
 import 'package:adleft/pages/modals/settings.dart';
-import 'package:adleft/pages/productPage.dart';
+import 'package:adleft/pages/products_page.dart';
+import 'package:adleft/pages/utility/login_page.dart';
+import 'package:adleft/pages/utility/merchant_login_page.dart';
+import 'package:adleft/pages/utility/merchant_register_page.dart';
+import 'package:adleft/pages/utility/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/drawers/legend_drawer_info.dart';
 import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar.dart';
@@ -154,7 +158,7 @@ class AppConfig {
       baseColor: Colors.black,
     ),
     bottomBarColors: BottomBarColors(
-      activeColor: Colors.cyanAccent,
+      activeColor: Colors.amber,
       disabledColor: LegendColors.gray4,
       backgroundColor: LegendColors.white100,
     ),
@@ -163,7 +167,7 @@ class AppConfig {
       foreground: LegendColors.gray4,
     ),
     cardBackgroundColor: Colors.white,
-    primaryColor: Colors.cyan,
+    primaryColor: Colors.amber,
     secondaryColor: Colors.tealAccent[100]!,
     scaffoldBackgroundColor: LegendColors.gray2,
     foreground: [
@@ -189,14 +193,14 @@ class AppConfig {
       4,
       8,
     ],
-    selectionColor: Colors.cyanAccent,
+    selectionColor: Colors.amberAccent,
     textColorDark: Colors.cyan[900]!,
     textColorLight: Colors.tealAccent[100]!,
     appBarColors: FixedAppBarColors(
-      backgroundColor: Colors.cyan,
-      iconColor: Colors.tealAccent[100]!,
-      selectedColor: Colors.cyanAccent,
-      foreground: Colors.teal[50]!,
+      backgroundColor: Colors.amber,
+      iconColor: Colors.amber[200]!,
+      selectedColor: Colors.amber[200]!,
+      foreground: Colors.amber[50]!,
     ),
     siderColorTheme: SiderColorTheme(
       background: Colors.cyan,
@@ -215,7 +219,7 @@ class AppConfig {
       baseColor: Colors.white,
     ),
     bottomBarColors: BottomBarColors(
-      activeColor: Colors.teal,
+      activeColor: Colors.amber,
       disabledColor: Colors.black26,
       backgroundColor: LegendColors.gray10,
     ),
@@ -224,8 +228,8 @@ class AppConfig {
       foreground: LegendColors.gray4,
     ),
     cardBackgroundColor: LegendColors.gray9,
-    primaryColor: Colors.teal,
-    secondaryColor: Color(0xFFb3dedb),
+    primaryColor: Colors.amber,
+    secondaryColor: Colors.deepOrange[400]!,
     scaffoldBackgroundColor: LegendColors.gray11,
     foreground: [
       LegendColors.gray10,
@@ -241,23 +245,38 @@ class AppConfig {
       LegendColors.gray6,
       LegendColors.gray5,
     ],
-    selectionColor: Colors.tealAccent,
+    selectionColor: Colors.amberAccent,
     textColorDark: LegendColors.gray6,
-    textColorLight: LegendColors.gray4,
+    textColorLight: LegendColors.gray1,
     appBarColors: FixedAppBarColors(
-      backgroundColor: Colors.teal,
-      iconColor: Colors.tealAccent,
-      selectedColor: Colors.tealAccent,
-      foreground: Colors.teal[50]!,
+      backgroundColor: Colors.amber,
+      iconColor: Colors.orange[300]!,
+      selectedColor: Colors.amber[100]!,
+      foreground: Colors.orange[50]!,
     ),
   );
 
   static List<MenuOption> menuOptions = [
-    /* MenuOption(
-      title: "Home",
+    MenuOption(
+      title: "Everything",
       page: "/",
       icon: Icons.home,
-    ),*/
+    ),
+    MenuOption(
+      title: "Clothing",
+      page: "/clothing",
+      icon: Icons.text_fields,
+    ),
+    MenuOption(
+      title: "Technology",
+      page: "/tech",
+      icon: Icons.camera,
+    ),
+    MenuOption(
+      title: "Beauty",
+      page: "/beauty",
+      icon: Icons.local_movies,
+    ),
   ];
 
   static List<LegendDrawerRoute> drawerRoutes = [
@@ -271,12 +290,50 @@ class AppConfig {
       width: 400,
       mobileWidth: 320,
     ),
+    LegendDrawerRoute(
+      title: "Wishlist",
+      name: "/wihlist",
+      contentBuilder: (context) {
+        return SettingsPage();
+      },
+      actions: [],
+      width: 400,
+      mobileWidth: 320,
+    ),
   ];
 
   static List<RouteInfo> routes = [
     RouteInfo(
       name: "/",
       page: Home(),
+    ),
+    RouteInfo(
+      name: "/clothing",
+      page: Home(),
+    ),
+    RouteInfo(
+      name: "/tech",
+      page: Home(),
+    ),
+    RouteInfo(
+      name: "/Beauty",
+      page: Home(),
+    ),
+    RouteInfo(
+      name: "/login",
+      page: LoginPage(),
+    ),
+    RouteInfo(
+      name: "/register",
+      page: RegisterPage(),
+    ),
+    RouteInfo(
+      name: "/merchantLogin",
+      page: MerchantLoginPage(),
+    ),
+    RouteInfo(
+      name: "/merchantRegister",
+      page: MerchantRegisterPage(),
     ),
     RouteInfo(
       name: "/products",

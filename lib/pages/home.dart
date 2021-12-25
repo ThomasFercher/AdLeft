@@ -1,15 +1,21 @@
-import 'package:adleft/logic/product.dart';
+import 'package:adleft/logic/objects/product.dart';
 import 'package:adleft/logic/providers/productProvider.dart';
 import 'package:adleft/overrides/productCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/legend_scaffold.dart';
+import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/typography/legend_text.dart';
+import 'package:legend_design_core/utils/legend_utils.dart';
 import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
 import 'package:legend_design_widgets/datadisplay/carousel/legendCarousel.dart';
 import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
 import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';
+import 'package:legend_design_widgets/legendButton/legendButton.dart';
+import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
@@ -25,9 +31,43 @@ class Home extends StatelessWidget {
     children = products.map((p) => ProductCard(product: p)).toList();
 
     return LegendScaffold(
-      singlePage: true,
+      singlePage: false,
       verticalChildrenSpacing: 12,
-      showAppBarMenu: false,
+      showAppBarMenu: true,
+      appBarBuilder: (context) {
+        return LegendButton(
+          margin: const EdgeInsets.only(
+            right: 32,
+          ),
+          text: LegendText(
+            text: "Anmelden",
+            textStyle: theme.typography.h1,
+            textAlign: TextAlign.center,
+          ),
+          style: LegendButtonStyle.gradient(
+            [
+              theme.colors.secondaryColor,
+              LegendColorTheme.darken(
+                theme.colors.secondaryColor,
+                0.04,
+              ),
+            ],
+            height: theme.appBarSizing.appBarHeight / 2,
+            width: LegendUtils.calcTextSize(
+                  "Anmelden",
+                  theme.typography.h1,
+                ).width +
+                36,
+          ),
+          onPressed: () {
+            RouterProvider.of(context).pushPage(
+              settings: const RouteSettings(
+                name: "/login",
+              ),
+            );
+          },
+        );
+      },
       children: [
         LegendCarousel(
           height: 300,
@@ -39,47 +79,17 @@ class Home extends StatelessWidget {
             LegendCard(),
           ],
         ),
-        SizedBox(
-          height: 600,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 5,
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: LegendCard(),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: LegendGrid(
-                              padding: EdgeInsets.all(4),
-                              crossAxisCount: 4,
-                              crossAxisSpacing: 4,
-                              mainAxisSpacing: 4,
-                              children: children,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: LegendCard(),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: LegendCard(),
-              ),
-            ],
+        LegendGrid(
+          padding: EdgeInsets.all(4),
+          crossAxisCount: 4,
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4,
+          children: children,
+          sizes: LegendGridSize(
+            xxl: LegendGridSizeInfo(6, 520),
+            large: LegendGridSizeInfo(4, 420),
+            medium: LegendGridSizeInfo(2, 360),
+            small: LegendGridSizeInfo(1, 480),
           ),
         )
       ],

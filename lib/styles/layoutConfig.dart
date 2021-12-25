@@ -23,4 +23,6 @@ class LayoutInfo {
       return Container();
     },
   );
+
+  static Widget loginButton = Container();
 }
