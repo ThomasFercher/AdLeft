@@ -38,7 +38,10 @@ dependencies:
   legend_design_platform:
     git:
       url: https://github.com/ThomasFercher/Legend-Design-Cross.git
-
+  firebase_core: ^1.10.6
+  cloud_firestore: ^3.1.5
+  firebase_auth: ^3.3.4
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

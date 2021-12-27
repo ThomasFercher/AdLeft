@@ -26,57 +26,61 @@ class ProductsPage extends StatelessWidget {
       pageName: "Product",
       layoutType: LayoutType.FixedHeader,
       showAppBarMenu: false,
-      singleScreen: true,
+      singlePage: true,
       maxContentWidth: 1200,
       contentBuilder: (context, s) {
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (p?.imagePath != null)
-              Hero(
-                tag: p!.uid,
-                child: Image.asset(
-                  p.imagePath,
-                  height: 600,
+        return Container(
+          width: s.width,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (p?.imagePath != null)
+                Hero(
+                  tag: p!.uid,
+                  child: Image.asset(
+                    p.imagePath,
+                    height: 600,
+                  ),
                 ),
+              const SizedBox(
+                width: 24,
               ),
-            const SizedBox(
-              width: 24,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  LegendText(
-                    text: p?.name,
-                    textStyle: theme.typography.h5,
-                  ),
-                  LegendText(
-                    text: "${p?.price}",
-                    textStyle: theme.typography.h3,
-                  ),
-                  LegendText(
-                    text: p?.description,
-                    textStyle: theme.typography.h1,
-                  ),
-                  LegendButton(
-                    text: LegendText(
-                      text: "Zum Angebot",
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    LegendText(
+                      text: p?.name,
+                      textStyle: theme.typography.h5,
                     ),
-                    onPressed: () {
-                      if (p?.link != null) LegendUtils.launchInBrowser(p!.link);
-                    },
-                    style: LegendButtonStyle.gradient(
-                      [
-                        Colors.red,
-                        Colors.yellow,
-                      ],
+                    LegendText(
+                      text: "${p?.price}",
+                      textStyle: theme.typography.h3,
                     ),
-                  )
-                ],
-              ),
-            )
-          ],
+                    LegendText(
+                      text: p?.description,
+                      textStyle: theme.typography.h1,
+                    ),
+                    LegendButton(
+                      text: LegendText(
+                        text: "Zum Angebot",
+                      ),
+                      onPressed: () {
+                        if (p?.link != null)
+                          LegendUtils.launchInBrowser(p!.link);
+                      },
+                      style: LegendButtonStyle.gradient(
+                        [
+                          Colors.red,
+                          Colors.yellow,
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         );
       },
     );

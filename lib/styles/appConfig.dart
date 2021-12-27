@@ -1,6 +1,7 @@
 import 'package:adleft/pages/home.dart';
 import 'package:adleft/pages/modals/settings.dart';
 import 'package:adleft/pages/products_page.dart';
+import 'package:adleft/pages/user/profile.dart';
 import 'package:adleft/pages/utility/login_page.dart';
 import 'package:adleft/pages/utility/merchant_login_page.dart';
 import 'package:adleft/pages/utility/merchant_register_page.dart';
@@ -338,6 +339,11 @@ class AppConfig {
     RouteInfo(
       name: "/products",
       page: ProductsPage(),
+      isUnderyling: true,
+    ),
+    RouteInfo(
+      name: "/profile",
+      page: ProfilePage(),
       isUnderyling: true,
     ),
   ];

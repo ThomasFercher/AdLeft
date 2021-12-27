@@ -1,5 +1,7 @@
+import 'package:adleft/logic/firebase/auth_provider.dart';
 import 'package:adleft/logic/objects/product.dart';
 import 'package:adleft/logic/providers/productProvider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +12,7 @@ import 'package:legend_design_core/typography/typography.dart';
 import 'package:provider/provider.dart';
 import 'styles/appConfig.dart';
 import 'styles/layoutConfig.dart';
+import 'firebase_options.dart';
 
 void main() {
   /* TODO:
@@ -87,9 +90,14 @@ void main() {
             wishlist: [],
           ),
         ),
+        ChangeNotifierProvider<AuthProvider>(
+          create: (_) => AuthProvider(),
+        ),
       ],
       globalFooter: LayoutInfo.footer,
-      future: Future.delayed(Duration(seconds: 2), () => true),
+      future: Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      ),
       splashScreen: Container(
         color: AppConfig.darkColorTheme.scaffoldBackgroundColor,
         child: Center(

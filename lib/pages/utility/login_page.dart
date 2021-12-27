@@ -1,9 +1,11 @@
+import 'package:adleft/logic/firebase/auth_provider.dart';
 import 'package:adleft/logic/objects/product.dart';
 import 'package:adleft/logic/providers/productProvider.dart';
 import 'package:adleft/overrides/productCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/legend_scaffold.dart';
+import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
@@ -21,6 +23,15 @@ import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
+  Future<SignInState> signIn(
+      BuildContext context, String email, String password) async {
+    SignInState status = await Provider.of<AuthProvider>(context, listen: false)
+        .signInEmailPassword(email, password);
+
+    print(status);
+    return status;
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -74,30 +85,27 @@ class LoginPage extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: LegendForm(
-                                          showSubmitButton: false,
-                                          buildSubmitButton: (key) {
-                                            return LegendButton(
-                                              text: LegendText(
-                                                text: "Anmelden",
-                                              ),
-                                              onPressed: () {
-                                                key.currentState?.validate();
-                                              },
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                vertical: 12,
-                                              ),
-                                              style: LegendButtonStyle.confirm(
-                                                height: 42,
-                                                color:
-                                                    theme.colors.primaryColor,
-                                                activeColor:
-                                                    theme.colors.selectionColor,
-                                                textColor:
-                                                    theme.colors.textColorLight,
-                                              ),
+                                          showSubmitButton: true,
+                                          submitText: "Anmelden",
+                                          onSubmit: (values) async {
+                                            SignInState state = await signIn(
+                                              context,
+                                              values["Email"],
+                                              values["Password"],
                                             );
+                                            print(state);
+                                            if (state == SignInState.LoggedIn) {
+                                              Navigator.pop(context);
+                                            }
                                           },
+                                          buttonStyle:
+                                              LegendButtonStyle.confirm(
+                                            color: theme.colors.primaryColor,
+                                            activeColor:
+                                                theme.colors.selectionColor,
+                                            textColor:
+                                                theme.colors.textColorLight,
+                                          ),
                                           children: [
                                             Expanded(child: Container()),
                                             LegendFormField.text(
@@ -159,7 +167,9 @@ class LoginPage extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      Center(
+                                      Container(
+                                        alignment: Alignment.center,
+                                        margin: const EdgeInsets.only(top: 6),
                                         child: LegendButton(
                                           text: RichText(
                                             text: TextSpan(
@@ -179,7 +189,12 @@ class LoginPage extends StatelessWidget {
                                             ),
                                           ),
                                           onPressed: () {
-                                            print("password");
+                                            RouterProvider.of(context).pushPage(
+                                              settings: RouteSettings(
+                                                name: "/register",
+                                                arguments: "",
+                                              ),
+                                            );
                                           },
                                           style: LegendButtonStyle.text(
                                             activeColor:
