@@ -6,6 +6,7 @@ import 'package:adleft/pages/utility/login_page.dart';
 import 'package:adleft/pages/utility/merchant_login_page.dart';
 import 'package:adleft/pages/utility/merchant_register_page.dart';
 import 'package:adleft/pages/utility/register_page.dart';
+import 'package:adleft/pages/wishlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/drawers/legend_drawer_info.dart';
 import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar.dart';
@@ -212,9 +213,9 @@ class AppConfig {
   static LegendColorTheme darkColorTheme = LegendColorTheme(
     textContrast: Color(0xFFb3dedb),
     siderColorTheme: SiderColorTheme(
-      background: Colors.teal,
-      backgroundMenu: Colors.teal[600]!,
-      foreground: Colors.teal[50]!,
+      background: Colors.amber,
+      backgroundMenu: Colors.amber[600]!,
+      foreground: Colors.orange[50]!,
     ),
     typographyColors: LegendTypographyColors(
       baseColor: Colors.white,
@@ -344,6 +345,11 @@ class AppConfig {
     RouteInfo(
       name: "/profile",
       page: ProfilePage(),
+      isUnderyling: true,
+    ),
+    RouteInfo(
+      name: "/wishlist",
+      page: WishlistPage(),
       isUnderyling: true,
     ),
   ];

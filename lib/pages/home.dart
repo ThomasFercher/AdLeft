@@ -2,6 +2,7 @@ import 'package:adleft/logic/firebase/auth_provider.dart';
 import 'package:adleft/logic/objects/product.dart';
 import 'package:adleft/logic/providers/productProvider.dart';
 import 'package:adleft/overrides/productCard.dart';
+import 'package:adleft/overrides/appBarBuilder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -38,75 +39,7 @@ class Home extends StatelessWidget {
       verticalChildrenSpacing: 12,
       showAppBarMenu: true,
       appBarBuilder: (context) {
-        return Consumer<AuthProvider>(
-          builder: (context, auth, child) {
-            bool isLoggedIn = auth.isSignedIn();
-            User? user = auth.getUser;
-            String? letter;
-
-            if (user != null) {
-              letter = user.email?[0].toUpperCase();
-            }
-
-            double avatarHeight =
-                theme.sizing.appBarSizing.appBarHeight / 3 * 2;
-
-            return isLoggedIn
-                ? LegendAvatar(
-                    width: avatarHeight,
-                    height: avatarHeight,
-                    borderRadius: avatarHeight / 2,
-                    backgroundColor: theme.colors.secondaryColor,
-                    child: LegendText(
-                      text: letter,
-                      textStyle: TextStyle(
-                        fontSize: avatarHeight / 2,
-                        color: Colors.white,
-                      ),
-                    ),
-                    margin: const EdgeInsets.only(right: 32),
-                    onTap: () {
-                      RouterProvider.of(context).pushPage(
-                        settings: const RouteSettings(
-                          name: "/profile",
-                        ),
-                      );
-                    },
-                  )
-                : LegendButton(
-                    margin: const EdgeInsets.only(
-                      right: 32,
-                    ),
-                    text: LegendText(
-                      text: "Anmelden",
-                      textStyle: theme.typography.h1,
-                      textAlign: TextAlign.center,
-                    ),
-                    style: LegendButtonStyle.gradient(
-                      [
-                        theme.colors.secondaryColor,
-                        LegendColorTheme.darken(
-                          theme.colors.secondaryColor,
-                          0.04,
-                        ),
-                      ],
-                      height: theme.appBarSizing.appBarHeight / 2,
-                      width: LegendUtils.calcTextSize(
-                            "Anmelden",
-                            theme.typography.h1,
-                          ).width +
-                          36,
-                    ),
-                    onPressed: () {
-                      RouterProvider.of(context).pushPage(
-                        settings: const RouteSettings(
-                          name: "/login",
-                        ),
-                      );
-                    },
-                  );
-          },
-        );
+        return AppBarBuilder();
       },
       children: [
         LegendCarousel(
