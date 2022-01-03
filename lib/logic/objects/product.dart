@@ -8,6 +8,7 @@ class Product {
   final String link;
   final String imagePath;
   late final Image image;
+  final String category;
 
   Product({
     required this.uid,
@@ -16,6 +17,7 @@ class Product {
     required this.price,
     required this.link,
     required this.imagePath,
+    required this.category,
   }) {
     image = Image.asset(imagePath);
   }

@@ -25,45 +25,45 @@ void main() {
 */
   List<Product> products = [
     Product(
-      name: "Produkt 2",
-      description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
-      price: 4.99,
-      link:
-          "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
-      uid: "1",
-      imagePath: "./assets/images/product.png",
-    ),
+        name: "Produkt 2",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+        price: 4.99,
+        link:
+            "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
+        uid: "1",
+        imagePath: "./assets/images/product.png",
+        category: "Technik"),
     Product(
-      name: "Produkt 2",
-      description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
-      price: 12.99,
-      link:
-          "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
-      uid: "2",
-      imagePath: "./assets/images/product.png",
-    ),
+        name: "Produkt 2",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+        price: 12.99,
+        link:
+            "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
+        uid: "2",
+        imagePath: "./assets/images/product.png",
+        category: "Technik"),
     Product(
-      name: "Produkt 3",
-      description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
-      price: 69,
-      link:
-          "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
-      uid: "3",
-      imagePath: "./assets/images/product.png",
-    ),
+        name: "Produkt 3",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+        price: 69,
+        link:
+            "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
+        uid: "3",
+        imagePath: "./assets/images/product.png",
+        category: "Technik"),
     Product(
-      name: "Produkt 4",
-      description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
-      price: 120,
-      link:
-          "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
-      uid: "4",
-      imagePath: "./assets/images/product.png",
-    ),
+        name: "Produkt 4",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+        price: 120,
+        link:
+            "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
+        uid: "4",
+        imagePath: "./assets/images/product.png",
+        category: "Technik"),
   ];
 
   runApp(

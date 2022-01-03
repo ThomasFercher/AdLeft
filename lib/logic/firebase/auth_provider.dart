@@ -16,7 +16,6 @@ class AuthProvider extends ChangeNotifier {
   }
 
   bool isSignedIn() {
-    return true;
     return _user != null;
   }
 

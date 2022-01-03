@@ -2,8 +2,11 @@ import 'package:adleft/logic/firebase/auth_provider.dart';
 import 'package:adleft/logic/objects/product.dart';
 import 'package:adleft/logic/providers/productProvider.dart';
 import 'package:adleft/overrides/appBarBuilder.dart';
+
+import 'package:adleft/overrides/wishlist_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/legend_scaffold.dart';
 import 'package:legend_design_core/router/routeInfoProvider.dart';
@@ -11,6 +14,7 @@ import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/utils/legend_utils.dart';
+import 'package:legend_design_widgets/datadisplay/searchableList.dart/legend_searchable.dart';
 import 'package:legend_design_widgets/datadisplay/searchableList.dart/legend_searchable_list.dart';
 import 'package:legend_design_widgets/legendButton/legendButton.dart';
 import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
@@ -24,6 +28,29 @@ class WishlistPage extends StatelessWidget {
     RouteSettings? route = RouteInfoProvider.of(context)?.route;
     ThemeProvider theme = context.watch<ThemeProvider>();
     User? user = context.watch<AuthProvider>().getUser;
+
+    List<Product> wishlistItems = [
+      Product(
+          name: "Produkt 2",
+          description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+          price: 12.99,
+          link:
+              "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
+          uid: "2",
+          imagePath: "./assets/images/product.png",
+          category: "Technik"),
+      Product(
+          name: "Produkt 3",
+          description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+          price: 69,
+          link:
+              "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
+          uid: "3",
+          imagePath: "./assets/images/product.png",
+          category: "Technik"),
+    ];
 
     return LegendScaffold(
       pageName: "Wishlist",
@@ -47,7 +74,40 @@ class WishlistPage extends StatelessWidget {
                 text: "Wishlist",
                 textStyle: theme.typography.h5,
               ),
-              LegendSearchableList(),
+              Expanded(
+                child: LegendSearchableList(
+                  itemCount: wishlistItems.length,
+                  itemBuilder: (context, index) {
+                    return WishlistItem(
+                      product: wishlistItems[index],
+                    );
+                  },
+                  items: wishlistItems
+                      .map(
+                        (e) => LegendSearchable(
+                          fields: [
+                            LegendSearchableString(e.name),
+                            LegendSearchableString(e.description),
+                            LegendSearchableNumber(e.price),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                  filters: [
+                    LegendSearchableFilterString(
+                      displayName: "Search",
+                    ),
+                    LegendSearchableFilterRange(
+                      displayName: "Select Price",
+                      singleField: 2,
+                      range: Tween(
+                        begin: 0,
+                        end: 100,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         );
