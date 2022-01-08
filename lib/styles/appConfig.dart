@@ -126,12 +126,12 @@ class AppConfig {
       ),
     ),
     web: LegendSizing(
-      typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 32),
+      typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 36),
       borderRadius: [
-        BorderRadius.all(
+        const BorderRadius.all(
           Radius.circular(12),
         ),
-        BorderRadius.all(
+        const BorderRadius.all(
           Radius.circular(6),
         ),
       ],
@@ -149,12 +149,13 @@ class AppConfig {
         contentPadding: EdgeInsets.all(0),
         borderRadius: Radius.circular(20),
         iconSize: 24,
-        spacing: 20,
+        spacing: 16,
       ),
     ),
   );
 
   static LegendColorTheme lightColorTheme = LegendColorTheme(
+    disabledColor: Colors.black45,
     textContrast: Colors.cyan,
     typographyColors: LegendTypographyColors(
       baseColor: Colors.black,
@@ -211,6 +212,7 @@ class AppConfig {
     ),
   );
   static LegendColorTheme darkColorTheme = LegendColorTheme(
+    disabledColor: LegendColors.gray7,
     textContrast: Color(0xFFb3dedb),
     siderColorTheme: SiderColorTheme(
       background: Colors.amber,

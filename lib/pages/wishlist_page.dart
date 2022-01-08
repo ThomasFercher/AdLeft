@@ -16,6 +16,7 @@ import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/utils/legend_utils.dart';
 import 'package:legend_design_widgets/datadisplay/searchableList.dart/legend_searchable.dart';
 import 'package:legend_design_widgets/datadisplay/searchableList.dart/legend_searchable_list.dart';
+import 'package:legend_design_widgets/layout/customFlexLayout/legend_custom_flex_layout.dart';
 import 'package:legend_design_widgets/legendButton/legendButton.dart';
 import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
 import 'package:provider/src/provider.dart';
@@ -82,6 +83,21 @@ class WishlistPage extends StatelessWidget {
                       product: wishlistItems[index],
                     );
                   },
+                  filterHeight: 260,
+                  customFilterLayout: LegendFlexItem.column(
+                    childrenIndex: [
+                      0,
+                    ],
+                    children: [
+                      LegendFlexItem.row(
+                        spacing: 16,
+                        childrenIndex: [
+                          1,
+                          2,
+                        ],
+                      )
+                    ],
+                  ),
                   items: wishlistItems
                       .map(
                         (e) => LegendSearchable(
@@ -89,6 +105,7 @@ class WishlistPage extends StatelessWidget {
                             LegendSearchableString(e.name),
                             LegendSearchableString(e.description),
                             LegendSearchableNumber(e.price),
+                            LegendSearchableCategory(e.category),
                           ],
                         ),
                       )
@@ -104,6 +121,20 @@ class WishlistPage extends StatelessWidget {
                         begin: 0,
                         end: 100,
                       ),
+                    ),
+                    LegendSearchableFilterCategory(
+                      displayName: "Categories",
+                      singleField: 3,
+                      categories: [
+                        FilterCategoryData(
+                          value: "Technik",
+                          icon: Icons.account_tree_rounded,
+                        ),
+                        FilterCategoryData(
+                          value: "Clothing",
+                          icon: Icons.add_shopping_cart_sharp,
+                        ),
+                      ],
                     ),
                   ],
                 ),

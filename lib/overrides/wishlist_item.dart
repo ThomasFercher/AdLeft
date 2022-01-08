@@ -50,15 +50,19 @@ class WishlistItem extends StatelessWidget {
             Expanded(child: Container()),
             LegendText(
               text: "${product.price}€",
-              textStyle: theme.typography.h3,
+              textStyle: theme.typography.h2,
             ),
             Expanded(child: Container()),
             LegendText(
               text: product.category,
-              textStyle: theme.typography.h3,
+              textStyle: theme.typography.h2,
             ),
             Expanded(child: Container()),
             LegendAnimatedIcon(
+              padding: EdgeInsets.only(
+                right: 12,
+              ),
+              iconSize: 28,
               icon: Icons.delete,
               theme: LegendAnimtedIconTheme(
                 enabled: Colors.redAccent,
