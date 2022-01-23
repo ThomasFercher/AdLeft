@@ -36,41 +36,6 @@ class AppBarBuilder extends StatelessWidget {
 
     double avatarHeight = theme.sizing.appBarSizing.appBarHeight / 3 * 2;
 
-    MenuOption profileOption = RouterProvider.of(context)
-        .menuOptions
-        .singleWhere((element) => element.page == "/profile");
-    List<MenuOption> menu_options = [
-      profileOption,
-    ];
-    menu_options.addAll(profileOption.children ?? []);
-
-    MenuOption? sel = RouterProvider.of(context).current;
-
-    List<DrawerMenuTile> options = menu_options
-        .map(
-          (option) => DrawerMenuTile(
-            icon: option.icon,
-            title: option.title,
-            path: option.page,
-            left: false,
-            backgroundColor: theme.colors.foreground[1],
-            activeColor: theme.colors.selectionColor,
-            color: theme.colors.textColorLight,
-            collapsed: false,
-            onClicked: () => {
-              RouterProvider.of(context).pushPage(
-                settings: RouteSettings(
-                  name: option.page,
-                ),
-              )
-            },
-            rectangleIndicator: true,
-            forceColor: option == sel,
-            bottomSpacing: 16,
-          ),
-        )
-        .toList();
-
     return Row(
       children: [
         if (showWishList)
@@ -106,7 +71,6 @@ class AppBarBuilder extends StatelessWidget {
                       AppBarAvatar(
                         avatarHeight: avatarHeight,
                         letter: "T",
-                        options: options,
                         onRight: !menuCollapsed,
                       ),
                       if (showUsername)
