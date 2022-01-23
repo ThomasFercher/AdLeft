@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/layout/legend_scaffold.dart';
 import 'package:legend_design_core/router/routeInfoProvider.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
@@ -16,6 +17,7 @@ import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/utils/legend_utils.dart';
 import 'package:legend_design_widgets/datadisplay/searchableList.dart/legend_searchable.dart';
 import 'package:legend_design_widgets/datadisplay/searchableList.dart/legend_searchable_list.dart';
+import 'package:legend_design_widgets/input/sortIcon/sortIcon.dart';
 import 'package:legend_design_widgets/layout/customFlexLayout/legend_custom_flex_layout.dart';
 import 'package:legend_design_widgets/legendButton/legendButton.dart';
 import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
@@ -51,6 +53,26 @@ class WishlistPage extends StatelessWidget {
           uid: "3",
           imagePath: "./assets/images/product.png",
           category: "Technik"),
+      Product(
+        name: "Produkt 4",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+        price: 24,
+        link:
+            "https://www.gamefuel.com/collections/shop-all/products/cherry-burst",
+        uid: "3",
+        imagePath: "./assets/images/product.png",
+        category: "Clothing",
+      ),
+    ];
+
+    List<SortableField> sortabelFields = [
+      SortableField<double>(
+        index: 2,
+      ),
+      SortableField<String>(
+        index: 0,
+      ),
     ];
 
     return LegendScaffold(
@@ -77,12 +99,64 @@ class WishlistPage extends StatelessWidget {
               ),
               Expanded(
                 child: LegendSearchableList(
-                  itemCount: wishlistItems.length,
-                  itemBuilder: (context, index) {
-                    return WishlistItem(
-                      product: wishlistItems[index],
+                  buildHeader: (sort) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      child: LegendCustomFlexLayout(
+                        height: 64,
+                        item: LegendFlexItem.row(
+                          childrenIndex: [0, 1, 2, 3],
+                          childrenFlex: [6, 6, 6, 1],
+                        ),
+                        widgets: [
+                          Row(
+                            children: [
+                              LegendText(
+                                text: "Name",
+                                textStyle: theme.typography.h4,
+                              ),
+                              const SizedBox(
+                                width: 6,
+                              ),
+                              LegendSortIcon(
+                                onClicked: (status) {
+                                  sort(sortabelFields[1], status);
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              LegendText(
+                                text: "Preis",
+                                textStyle: theme.typography.h4,
+                              ),
+                              const SizedBox(
+                                width: 6,
+                              ),
+                              LegendSortIcon(
+                                onClicked: (status) {
+                                  sort(sortabelFields[0], status);
+                                },
+                              )
+                            ],
+                          ),
+                          LegendText(
+                            text: "Kategorie",
+                            textStyle: theme.typography.h4,
+                          ),
+                          Container(),
+                        ],
+                      ),
                     );
                   },
+                  itemCount: wishlistItems.length,
+                  itemWidgets: wishlistItems
+                      .map((e) => WishlistItem(product: e))
+                      .toList(),
+                  sortableFields: sortabelFields,
                   filterHeight: 260,
                   customFilterLayout: LegendFlexItem.column(
                     childrenIndex: [

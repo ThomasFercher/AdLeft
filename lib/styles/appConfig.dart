@@ -270,6 +270,18 @@ class AppConfig {
       title: "Clothing",
       page: "/clothing",
       icon: Icons.text_fields,
+      children: [
+        MenuOption(
+          title: "Men",
+          page: "/clothing/men",
+          icon: Icons.wallet_giftcard,
+        ),
+        MenuOption(
+          title: "Women",
+          page: "/clothing/women",
+          icon: Icons.call_to_action_sharp,
+        ),
+      ],
     ),
     MenuOption(
       title: "Technology",
@@ -280,6 +292,24 @@ class AppConfig {
       title: "Beauty",
       page: "/beauty",
       icon: Icons.local_movies,
+    ),
+    MenuOption(
+      title: "Profile",
+      page: "/profile",
+      icon: Icons.verified_user,
+      showInAppBar: false,
+      children: [
+        MenuOption(
+          title: "Settings",
+          page: "/settings",
+          icon: Icons.settings,
+        ),
+        MenuOption(
+          title: "Logout",
+          page: "/logout",
+          icon: Icons.logout,
+        ),
+      ],
     ),
   ];
 
@@ -314,6 +344,21 @@ class AppConfig {
     RouteInfo(
       name: "/clothing",
       page: Home(),
+      children: List.of(
+        [
+          RouteInfo(
+            name: "/clothing/men",
+            page: Home(),
+            isUnderyling: true,
+          ),
+          RouteInfo(
+            name: "/clothing/women",
+            page: Home(),
+            isUnderyling: true,
+          ),
+        ],
+        growable: true,
+      ),
     ),
     RouteInfo(
       name: "/tech",
@@ -352,6 +397,16 @@ class AppConfig {
     RouteInfo(
       name: "/wishlist",
       page: WishlistPage(),
+      isUnderyling: true,
+    ),
+    RouteInfo(
+      name: "/settings",
+      page: SettingsPage(),
+      isUnderyling: true,
+    ),
+    RouteInfo(
+      name: "/logout",
+      page: Home(),
       isUnderyling: true,
     ),
   ];

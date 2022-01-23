@@ -37,40 +37,55 @@ class WishlistItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              child: getImage(theme),
-            ),
-            LegendText(
-              text: product.name,
-              textStyle: theme.typography.h3,
-              padding: EdgeInsets.only(
-                left: 12,
+            Expanded(
+              flex: 6,
+              child: Row(
+                children: [
+                  Container(
+                    child: getImage(theme),
+                  ),
+                  LegendText(
+                    text: product.name,
+                    textStyle: theme.typography.h3,
+                    padding: EdgeInsets.only(
+                      left: 12,
+                    ),
+                  ),
+                ],
               ),
             ),
-            Expanded(child: Container()),
-            LegendText(
-              text: "${product.price}€",
-              textStyle: theme.typography.h2,
-            ),
-            Expanded(child: Container()),
-            LegendText(
-              text: product.category,
-              textStyle: theme.typography.h2,
-            ),
-            Expanded(child: Container()),
-            LegendAnimatedIcon(
-              padding: EdgeInsets.only(
-                right: 12,
+            Expanded(
+              flex: 6,
+              child: LegendText(
+                text: "${product.price}€",
+                textStyle: theme.typography.h2,
               ),
-              iconSize: 28,
-              icon: Icons.delete,
-              theme: LegendAnimtedIconTheme(
-                enabled: Colors.redAccent,
-                disabled: theme.colors.foreground[0],
+            ),
+            Expanded(
+              flex: 6,
+              child: LegendText(
+                text: product.category,
+                textStyle: theme.typography.h2,
               ),
-              onPressed: () {
-                if (onDelete != null) onDelete!(product);
-              },
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: LegendAnimatedIcon(
+                  padding: const EdgeInsets.only(
+                    right: 12,
+                  ),
+                  iconSize: 28,
+                  icon: Icons.delete,
+                  theme: LegendAnimtedIconTheme(
+                    enabled: Colors.redAccent,
+                    disabled: theme.colors.foreground[0],
+                  ),
+                  onPressed: () {
+                    if (onDelete != null) onDelete!(product);
+                  },
+                ),
+              ),
             ),
           ],
         ),

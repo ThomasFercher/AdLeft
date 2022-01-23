@@ -10,6 +10,7 @@ import 'package:legend_design_core/layout/legend_scaffold.dart';
 import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
+import 'package:legend_design_core/styles/theming/sizing/size_provider.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/utils/legend_utils.dart';
@@ -38,9 +39,8 @@ class Home extends StatelessWidget {
       singlePage: false,
       verticalChildrenSpacing: 12,
       showAppBarMenu: true,
-      appBarBuilder: (context) {
-        return AppBarBuilder();
-      },
+      showTopSubMenu: true,
+      appBarBuilder: (context) => AppBarBuilder(),
       children: [
         LegendCarousel(
           height: 300,

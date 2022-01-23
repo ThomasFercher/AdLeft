@@ -1,10 +1,15 @@
 import 'package:adleft/logic/firebase/auth_provider.dart';
+import 'package:adleft/overrides/appBarAvatar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/modals/legendPopups.dart';
+import 'package:legend_design_core/objects/drawer_menu_tile.dart';
+import 'package:legend_design_core/objects/menu_option.dart';
 import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
+import 'package:legend_design_core/styles/theming/sizing/size_provider.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/utils/legend_utils.dart';
@@ -26,11 +31,68 @@ class AppBarBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeProvider theme = context.watch<ThemeProvider>();
+
+    bool menuCollapsed = theme.menuCollapsed;
+
+    double avatarHeight = theme.sizing.appBarSizing.appBarHeight / 3 * 2;
+
+    MenuOption profileOption = RouterProvider.of(context)
+        .menuOptions
+        .singleWhere((element) => element.page == "/profile");
+    List<MenuOption> menu_options = [
+      profileOption,
+    ];
+    menu_options.addAll(profileOption.children ?? []);
+
+    MenuOption? sel = RouterProvider.of(context).current;
+
+    List<DrawerMenuTile> options = menu_options
+        .map(
+          (option) => DrawerMenuTile(
+            icon: option.icon,
+            title: option.title,
+            path: option.page,
+            left: false,
+            backgroundColor: theme.colors.foreground[1],
+            activeColor: theme.colors.selectionColor,
+            color: theme.colors.textColorLight,
+            collapsed: false,
+            onClicked: () => {
+              RouterProvider.of(context).pushPage(
+                settings: RouteSettings(
+                  name: option.page,
+                ),
+              )
+            },
+            rectangleIndicator: true,
+            forceColor: option == sel,
+            bottomSpacing: 16,
+          ),
+        )
+        .toList();
+
     return Row(
       children: [
+        if (showWishList)
+          LegendAnimatedIcon(
+            icon: Icons.list_alt_rounded,
+            iconSize: 28,
+            padding: EdgeInsets.only(right: 32),
+            theme: LegendAnimtedIconTheme(
+              enabled: theme.colors.selectionColor,
+              disabled: theme.colors.appBarColors.foreground,
+            ),
+            onPressed: () {
+              RouterProvider.of(context).pushPage(
+                settings: const RouteSettings(
+                  name: "/wishlist",
+                ),
+              );
+            },
+          ),
         Consumer<AuthProvider>(
           builder: (context, auth, child) {
-            bool isLoggedIn = auth.isSignedIn();
+            bool isLoggedIn = true; //auth.isSignedIn();
             User? user = auth.getUser;
             String? letter;
 
@@ -38,32 +100,14 @@ class AppBarBuilder extends StatelessWidget {
               letter = user.email?[0].toUpperCase();
             }
 
-            double avatarHeight =
-                theme.sizing.appBarSizing.appBarHeight / 3 * 2;
-
             return isLoggedIn
                 ? Row(
                     children: [
-                      LegendAvatar(
-                        width: avatarHeight,
-                        height: avatarHeight,
-                        borderRadius: avatarHeight / 2,
-                        backgroundColor: theme.colors.secondaryColor,
-                        child: LegendText(
-                          text: letter,
-                          textStyle: TextStyle(
-                            fontSize: avatarHeight / 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                        margin: const EdgeInsets.only(right: 24),
-                        onTap: () {
-                          RouterProvider.of(context).pushPage(
-                            settings: const RouteSettings(
-                              name: "/profile",
-                            ),
-                          );
-                        },
+                      AppBarAvatar(
+                        avatarHeight: avatarHeight,
+                        letter: "T",
+                        options: options,
+                        onRight: !menuCollapsed,
                       ),
                       if (showUsername)
                         LegendText(
@@ -106,22 +150,6 @@ class AppBarBuilder extends StatelessWidget {
                   );
           },
         ),
-        if (showWishList)
-          LegendAnimatedIcon(
-            icon: Icons.list_alt_rounded,
-            iconSize: 28,
-            theme: LegendAnimtedIconTheme(
-              enabled: theme.colors.selectionColor,
-              disabled: theme.colors.appBarColors.foreground,
-            ),
-            onPressed: () {
-              RouterProvider.of(context).pushPage(
-                settings: const RouteSettings(
-                  name: "/wishlist",
-                ),
-              );
-            },
-          ),
       ],
     );
   }
